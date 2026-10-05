@@ -10,9 +10,9 @@ local window = Rayfield:CreateWindow({
     theme = "default",
 })
 
-local homeTab = window:CreateTab({name = "Home", icon = "house"})
+local homeTab = window:CreateTab({name = "Home", icon = 98755624629571})
 
-homeTab:CreateSection({name = "Teleports", icon = "map-pinned"})
+homeTab:CreateSection({name = "Teleports", icon = 103963788475034})
 local teleportsGrid = homeTab:CreateGroup()
 local teleports = teleportsGrid:CreateGroup({direction = "row"})
 teleports:CreateButton({
@@ -49,7 +49,7 @@ teleports:CreateButton({
     end,
 })
 
-homeTab:CreateSection({name = "Automation", icon = "robot-arm"})
+homeTab:CreateSection({name = "Automation", icon = 80451686744860})
 homeTab:CreateButton({
     name = "Auto-Solve Captcha",
     callback = function()
@@ -105,13 +105,13 @@ homeTab:CreateButton({
     end,
 })
 
-local keybindsTab = window:CreateTab({name = "Keybinds", icon = "keyboard"})
+local keybindsTab = window:CreateTab({name = "Keybinds", icon = 121474456068237})
 keybindsTab:CreateText({
     name = "K | SkyDrop",
     text = "Press once to initiate, press again to drop.",
 })
 
-local creditsTab = window:CreateTab({name = "Credits", icon = "info"})
+local creditsTab = window:CreateTab({name = "Credits", icon = 124560466474914})
 creditsTab:CreateText({
     name = "yaboi_v3rt3x",
     text = "Utility Hub Creator",
