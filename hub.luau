@@ -1,7 +1,5 @@
 local Rayfield = loadstring(game:HttpGet("https://sirius.menu/gen2-preview"))()
 local hum = game.Players.LocalPlayer.Character.HumanoidRootPart
-local vaehz = nil
-local autoWaterPlant = false
 
 local window = Rayfield:CreateWindow({
     name = "My Utility Hub Lad",
@@ -18,25 +16,19 @@ local teleports = teleportsGrid:CreateGroup({direction = "row"})
 teleports:CreateButton({
     name = "Spawn",
     callback = function()
-        hum.CFrame = CFrame.new(0, 3, -1.93504333, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        hum.CFrame = CFrame.new(0, 3, -2)
     end,
 })
 teleports:CreateButton({
     name = "Secret Room",
     callback = function()
-        hum.CFrame = CFrame.new(23, 130, -4282, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    end,
-})
-teleports:CreateButton({
-    name = "Bench (Chilling vaehz)",
-    callback = function()
-        hum.CFrame = CFrame.new(-940, 3, -351.802338, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        hum.CFrame = CFrame.new(23, 130, -4282)
     end,
 })
 teleports:CreateButton({
     name = "vaehz",
     callback = function()
-        vaehz = game.Players:GetPlayerByUserId(game.CreatorId)
+        local vaehz = game.Players:GetPlayerByUserId(game.CreatorId)
         if vaehz then
             hum.CFrame = vaehz.Character.HumanoidRootPart.CFrame
         else   
@@ -46,6 +38,18 @@ teleports:CreateButton({
                 duration = 5,
             })
         end
+    end,
+})
+teleports:CreateButton({
+    name = "Bench (Chilling vaehz)",
+    callback = function()
+        hum.CFrame = CFrame.new(-940, 3, -352)
+    end,
+})
+teleports:CreateButton({
+    name = "Tower (Sleeping vaehz)",
+    callback = function()
+        hum.CFrame = CFrame.new(-45, 29, 19)
     end,
 })
 
@@ -73,6 +77,7 @@ homeTab:CreateButton({
         end
     end,
 })
+local autoWaterPlant = false
 local autoWater = homeTab:CreateToggle({
     name = "Auto-Water Plant",
     value = false,
@@ -90,18 +95,36 @@ local autoWater = homeTab:CreateToggle({
     end,
 })
 
+homeTab:CreateSection({name = "Donation", icon = 132331555762628})
 homeTab:CreateButton({
     name = "Open Donation UI",
     callback = function()
         game:GetService("Players").LocalPlayer.PlayerGui.donoui.Enabled = true
     end,
 })
-
 homeTab:CreateDivider()
+local TextChatService = game:GetService("TextChatService")
+local DonationAnnounce = game:GetService("ReplicatedStorage"):WaitForChild("DonationAnnounce")
+local RBXGeneral = (TextChatService:WaitForChild("TextChannels")):WaitForChild("RBXGeneral")
+local fdp = game.Players.LocalPlayer.Name
+local fda = 10
+homeTab:CreateDropdown({
+    name = "Fake Donation Amount",
+    multiSelect = false,
+    options = {"10", "50", "100", "500", "1000", "5000", "10000"},
+    value = {"10"},
+    callback = function(selected)
+        fda = tonumber(selected)
+    end,
+})
 homeTab:CreateButton({
-    name = "Unload Hub",
+    name = "Fake Donation Announcement (Client)",
     callback = function()
-        window:Unload()
+        RBXGeneral:DisplaySystemMessage((string.format(
+            "<font color=\"#00ff00\"><b>%s just donated %d like the absolute MAD lad he is</b></font>",
+            ((fdp:gsub("&", "&amp;")):gsub("<", "&lt;")):gsub(">", "&gt;"),
+            fda
+        )))
     end,
 })
 
@@ -140,5 +163,13 @@ creditsTab:CreateButton({
             content = "vaehz's Discord Server Link has been set to your clipboard!",
             duration = 5,
         })
+    end,
+})
+
+creditsTab:CreateDivider()
+creditsTab:CreateButton({
+    name = "Unload Hub",
+    callback = function()
+        window:Unload()
     end,
 })
