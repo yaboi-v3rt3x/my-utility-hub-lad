@@ -16,12 +16,14 @@ local teleports = teleportsGrid:CreateGroup({direction = "row"})
 teleports:CreateButton({
     name = "Spawn",
     callback = function()
+        hum = game.Players.LocalPlayer.Character.HumanoidRootPart
         hum.CFrame = CFrame.new(0, 3, -2)
     end,
 })
 teleports:CreateButton({
     name = "Secret Room",
     callback = function()
+        hum = game.Players.LocalPlayer.Character.HumanoidRootPart
         hum.CFrame = CFrame.new(23, 130, -4282)
     end,
 })
@@ -30,7 +32,8 @@ teleports:CreateButton({
     callback = function()
         local vaehz = game.Players:GetPlayerByUserId(game.CreatorId)
         if vaehz then
-            hum.CFrame = vaehz.Character.HumanoidRootPart.CFrame
+            hum = game.Players.LocalPlayer.Character.HumanoidRootPart
+            hum.CFrame = vaehz.Character.HumanoidRootPart
         else   
             window:Notify({
                 title = "Teleport Error",
@@ -41,15 +44,31 @@ teleports:CreateButton({
     end,
 })
 teleports:CreateButton({
+    name = "Rock Paper Scissors",
+    callback = function()
+        hum = game.Players.LocalPlayer.Character.HumanoidRootPart
+        hum.CFrame = CFrame.new(-41, 38, 19)
+    end,
+})
+teleports:CreateButton({
     name = "Bench (Chilling vaehz)",
     callback = function()
+        hum = game.Players.LocalPlayer.Character.HumanoidRootPart
         hum.CFrame = CFrame.new(-940, 3, -352)
     end,
 })
 teleports:CreateButton({
     name = "Tower (Sleeping vaehz)",
     callback = function()
+        hum = game.Players.LocalPlayer.Character.HumanoidRootPart
         hum.CFrame = CFrame.new(-45, 29, 19)
+    end,
+})
+teleports:CreateButton({
+    name = "Coffins",
+    callback = function()
+        hum = game.Players.LocalPlayer.Character.HumanoidRootPart
+        hum.CFrame = CFrame.new(-48, 4.5, 19)
     end,
 })
 
@@ -85,12 +104,68 @@ local autoWater = homeTab:CreateToggle({
         autoWaterPlant = value
         local startWait = 1
         while autoWaterPlant == true do
-            hum.CFrame = CFrame.new(15, 130, -4270, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            hum = game.Players.LocalPlayer.Character.HumanoidRootPart
+            hum.CFrame = CFrame.new(15, 130, -4270)
             wait(startWait)
             workspace.secret.PotPlant.prox.ProximityPrompt:InputHoldBegin()
             wait(workspace.secret.PotPlant.prox.ProximityPrompt.HoldDuration + 0.25)
             workspace.secret.PotPlant.prox.ProximityPrompt:InputHoldEnd()
             startWait = 0
+        end
+        workspace.secret.PotPlant.prox.ProximityPrompt:InputHoldEnd()
+    end,
+})
+
+local autoPlayRPS = false
+local function checkRPS()
+    if autoPlayRPS == true then
+        if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
+            hum = game.Players.LocalPlayer.Character.HumanoidRootPart
+            local rps1 = workspace.RpsGame.rps1:FindFirstChild("SeatWeld")
+            local rps2 = workspace.RpsGame.rps2:FindFirstChild("SeatWeld")
+            if not rps1 then
+                return 1
+            elseif not rps2 then
+                return 2
+            else
+                hum.CFrame = CFrame.new(-41, 38, 19)
+                wait(1)
+                return checkRPS()
+            end
+        end
+    end
+    return nil
+end
+local autoRPS = homeTab:CreateToggle({
+    name = "Auto-Play Rock Paper Scissors",
+    value = false,
+    callback = function(value)
+        autoPlayRPS = value
+        while autoPlayRPS == true do
+            local check = checkRPS()
+            if check then
+                while game.Players.LocalPlayer.Character.Humanoid.Sit == false do
+                    hum = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    if check == 1 then
+                        hum.CFrame = CFrame.new(-48.7, 35.5, 23.5)
+                    elseif check == 2 then
+                        hum.CFrame = CFrame.new(-48.7, 35.5, 14.5)
+                    end
+                    wait(1)
+                end
+            end
+            if game:GetService("Players").LocalPlayer.PlayerGui.rps.DecideScreen.Visible == true then
+                local choice = math.random(1,3)
+                if choice == 1 then
+                    game:GetService("ReplicatedStorage"):WaitForChild("RpsRemote"):FireServer("Choose", "Rock")
+                elseif choice == 2 then
+                    game:GetService("ReplicatedStorage"):WaitForChild("RpsRemote"):FireServer("Choose", "Paper")
+                else
+                    game:GetService("ReplicatedStorage"):WaitForChild("RpsRemote"):FireServer("Choose", "Scissors")
+                end
+                wait(3)
+            end
+            wait(1)
         end
     end,
 })
