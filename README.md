@@ -1,6 +1,9 @@
 ## Loadstring
 ``loadstring(game:HttpGet("https://raw.githubusercontent.com/yaboi-v3rt3x/my-utility-hub-lad/refs/heads/main/hub.luau"))()``
 ## Changelog
+### v1008.26.0230
+> - Added New Teleports ``Rock Paper Scissors`` & ``Coffins``
+> - Added Auto-Play Rock Paper Scissors
 ### v1007.26.0000
 > - Added New Teleport ``Tower (Sleeping vaehz)``
 > - Added Fake Donation Feature (Client)
