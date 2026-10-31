@@ -1,6 +1,10 @@
 ## Loadstring
 ``loadstring(game:HttpGet("https://raw.githubusercontent.com/yaboi-v3rt3x/my-utility-hub-lad/refs/heads/main/hub.luau"))()``
 ## Changelog
+### v1031.26.0315
+> - Added New Teleports ``Bomb Tag`` & ``Piano``
+> - Added Auto-Play Bomb Tag
+> - Added Button to Load Piano Auto-Player
 ### v1008.26.0230
 > - Added New Teleports ``Rock Paper Scissors`` & ``Coffins``
 > - Added Auto-Play Rock Paper Scissors
