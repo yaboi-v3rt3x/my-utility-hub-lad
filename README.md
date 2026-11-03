@@ -4,6 +4,7 @@
 ### v1103.26.1850
 > - Added New Teleports ``Idea Thinking Centre``, ``Cave (In Wall vaehz)`` & ``Lighthouse (Tiny vaehz)``
 > - Added New **Visual Tab** and moved Donation Section
+> - Added New **Automation Tab** and moved Automation Section
 > - Added **vaehz Nametag** toggle
 > - Improved Teleports to have proper rotation
 > - Added Hub Version to Hub
